@@ -5,3 +5,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* custom css */
+.nav-ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-ul a {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.nav-ul a:hover,
+.nav-ul a.active {
+  background-color: #B87965;
+  color: #fff;
+}
