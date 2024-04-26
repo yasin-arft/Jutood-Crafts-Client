@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // auth info
   const { loginUser, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // react hook form
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,10 +22,13 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         setLoading(false);
+        navigate('/');
+        toast.success('Logged in successfully!');
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false)
+        setLoading(false);
+        toast.error('Incorrect email or password');
       });
   }
 

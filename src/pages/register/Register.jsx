@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   // auth info
   const { createUser, setLoading } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   // password status state
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,12 +31,16 @@ const Register = () => {
           displayName: name, photoURL: photo
         }).then(() => {
           setLoading(false);
+          navigate('/');
+          toast.success('Registered successfully!');
         }).catch(() => {
           setLoading(false);
+          navigate('/');
         });
       })
       .catch(() => {
         setLoading(false);
+        toast.error('An unexpected error occurred!');
       });
   }
 

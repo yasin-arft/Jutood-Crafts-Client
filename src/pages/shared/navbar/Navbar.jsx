@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import OurNavLink from "./OurNavLink";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { currentUser, logout, setLoading } = useContext(AuthContext);
@@ -29,12 +30,14 @@ const Navbar = () => {
     logout()
       .then(() => {
         setLoading(false);
+        navigate('/');
+        toast.success('Logged out successfully!');
       })
       .catch(() => {
         setLoading(false);
+        toast.error('An unexpected error occurred!');
       });
   }
-
 
   return (
     <nav className="container mx-auto px-3">
