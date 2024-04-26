@@ -8,12 +8,11 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   // login handler
-  const handleLogin = (data) => {
+  const handleLogin = data => {
     const email = data.email;
     const password = data.password;
     console.log(email, password);
   }
-
 
   return (
     <div className="max-w-md mx-auto mb-6 md:mb-8 lg:mb-10">
