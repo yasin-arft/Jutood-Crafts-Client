@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  // auth info
+  const { createUser, setLoading } = useContext(AuthContext);
+
+  // password status state
   const [showPassword, setShowPassword] = useState(false);
+
+  // react hook form components
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleRegister = data => {
@@ -13,7 +21,24 @@ const Register = () => {
     const password = data.password;
     const photo = data.photo;
 
-    console.log(name, email, password, photo);
+    // create new user
+    createUser(email, password)
+      .then(result => {
+
+        // update user name and photoUrl
+        updateProfile(result.user, {
+          displayName: name, photoURL: photo
+        }).then(() => {
+          setLoading(false);
+        }).catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        setLoading(false);
+      })
   }
 
   return (
