@@ -11,7 +11,7 @@ const Root = () => {
       <main className="container mx-auto px-3">
         <Outlet />
       </main>
-      <footer>
+      <footer className="bg-secondary">
         <Footer />
       </footer>
     </>
