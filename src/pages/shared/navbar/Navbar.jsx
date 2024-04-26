@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import OurNavLink from "./OurNavLink";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
-  const user = true;
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const navItemsData = [
@@ -11,7 +13,7 @@ const Navbar = () => {
   ]
 
   // private routes
-  user && navItemsData.push(
+  currentUser && navItemsData.push(
     { path: '/add_craft', text: 'Add Craft' },
     { path: '/my_art_craft', text: 'My Art & Craft' },
   )
@@ -43,13 +45,18 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {
-            user ?
+            currentUser ?
+              <div className="flex gap-2 items-center">
+                <span>
+                  {
+                    currentUser.photoURL
+                  }
+                </span>
+                <button className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
+              </div> :
               <div className="flex gap-2 items-center">
                 <button onClick={() => navigate('/login')} className="border btn bg-primary hover:bg-secondary text-white duration-300">Login</button>
                 <button onClick={() => navigate('/register')} className="border btn bg-primary hover:bg-secondary text-white duration-300">Register</button>
-              </div> :
-              <div>
-                <button className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
               </div>
           }
         </div>

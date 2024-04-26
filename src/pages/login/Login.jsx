@@ -15,15 +15,14 @@ const Login = () => {
   const handleLogin = data => {
     const email = data.email;
     const password = data.password;
-    console.log(email, password);
 
     // login with email and password
     loginUser(email, password)
-      .then(result => {
-        console.log(result.user);
+      .then(() => {
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         setLoading(false)
       });
   }
