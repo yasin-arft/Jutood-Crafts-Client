@@ -1,12 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import OurNavLink from "./OurNavLink";
 
 const Navbar = () => {
+  const user = false;
+  const navigate = useNavigate();
+
   const navItemsData = [
     { path: '/', text: 'Home' },
-    { path: '/all_art_craft', text: 'All Art & craft' },
+    { path: '/all_art_craft', text: 'All Art & craft' }
+  ]
+
+  // private routes
+  user && navItemsData.push(
     { path: '/add_craft', text: 'Add Craft' },
     { path: '/my_art_craft', text: 'My Art & Craft' },
-  ]
+  )
 
   const navLinks = <>
     {
@@ -34,7 +42,16 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {
+            user ?
+              <div className="flex gap-2 items-center">
+                <button onClick={() => navigate('/login')} className="border btn bg-primary hover:bg-secondary text-white duration-300">Login</button>
+                <button onClick={() => navigate('/register')} className="border btn bg-primary hover:bg-secondary text-white duration-300">Register</button>
+              </div> :
+              <div>
+                <button className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
+              </div>
+          }
         </div>
       </div>
     </nav>
