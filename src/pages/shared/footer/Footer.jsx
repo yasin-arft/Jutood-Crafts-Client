@@ -11,7 +11,7 @@ const Footer = () => {
         </aside>
         <div>
           <h2 className="text-xl font-semibold mb-3">Contacts</h2>
-          <p>+880 011111-121212</p>
+          <p>+880 010111-121212</p>
           <p>example@gmail.com</p>
         </div>
         <div className="flex items-center gap-2 text-2xl">
