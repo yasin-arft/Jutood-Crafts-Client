@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import OurNavLink from "./OurNavLink";
 
 const Navbar = () => {
-  const user = false;
+  const user = true;
   const navigate = useNavigate();
 
   const navItemsData = [
