@@ -30,15 +30,13 @@ const Register = () => {
           displayName: name, photoURL: photo
         }).then(() => {
           setLoading(false);
-        }).catch((error) => {
-          console.log(error);
+        }).catch(() => {
           setLoading(false);
         });
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         setLoading(false);
-      })
+      });
   }
 
   return (

@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
+  // auth info
+  const { loginUser, setLoading } = useContext(AuthContext);
 
   // react hook form
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,6 +16,16 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     console.log(email, password);
+
+    // login with email and password
+    loginUser(email, password)
+      .then(result => {
+        console.log(result.user);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false)
+      });
   }
 
   return (
