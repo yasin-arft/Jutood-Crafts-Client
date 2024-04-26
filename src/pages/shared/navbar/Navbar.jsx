@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const navItemsData = [
@@ -23,6 +23,18 @@ const Navbar = () => {
       navItemsData.map((item, idx) => <OurNavLink key={idx} item={item} />)
     }
   </>
+
+  // logout handler
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }
+
 
   return (
     <nav className="container mx-auto px-3">
@@ -52,7 +64,7 @@ const Navbar = () => {
                     currentUser.photoURL
                   }
                 </span>
-                <button className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
+                <button onClick={handleLogout} className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
               </div> :
               <div className="flex gap-2 items-center">
                 <button onClick={() => navigate('/login')} className="border btn bg-primary hover:bg-secondary text-white duration-300">Login</button>
