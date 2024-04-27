@@ -54,13 +54,16 @@ const Register = () => {
             <span className="label-text text-base font-medium">Name</span>
           </div>
           <input
-            {...register('name')}
+            {...register('name', {
+              required: 'Name is required'
+            })}
             type="text"
             placeholder="Your name"
             className="input input-bordered w-full"
           />
         </label>
-
+        {errors.name && (<small className="text-error">{errors.name.message}</small>)}
+        
         {/* email */}
         <label className="form-control w-full">
           <div className="label">
@@ -118,11 +121,14 @@ const Register = () => {
             <span className="label-text text-base font-medium">Photo Url</span>
           </div>
           <input
-            {...register('photo')}
+            {...register('photo', {
+              required: 'Photo url is required'
+            })}
             type="text"
             placeholder="Paste your photo url"
             className="input input-bordered w-full" />
         </label>
+        {errors.photo && (<small className="text-error">{errors.photo.message}</small>)}
 
         {/* form submit button */}
         <input
