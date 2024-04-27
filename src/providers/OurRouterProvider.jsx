@@ -7,6 +7,7 @@ import Register from "../pages/register/Register";
 import PrivateRoute from "../routes/PrivateRoute";
 import AddCraft from "../pages/addCraft/AddCraft";
 import AllArtCraft from "../pages/allArtCraft/AllArtCraft";
+import CraftDetails from "../pages/craftDetails/CraftDetails";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
         path: '/all_art_craft',
         element: <AllArtCraft />,
         loader: () => fetch('http://localhost:5000/crafts')
+      },
+      {
+        path: '/item_details/:id',
+        element: <CraftDetails />,
+        loader: ({ params }) => fetch(`http://localhost:5000/crafts/${params.id}`)
       }
     ]
   }

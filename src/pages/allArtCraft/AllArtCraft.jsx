@@ -28,7 +28,7 @@ const AllArtCraft = () => {
                     <td>{item.itemName}</td>
                     <td>{item.price}</td>
                     <td>{item.rating}</td>
-                    <td><button onClick={() => navigate(`item_details/${item._id}`)} className="btn bg-primary hover:bg-secondary text-white">View Details</button></td>
+                    <td><button onClick={() => navigate(`/item_details/${item._id}`)} className="btn bg-primary hover:bg-secondary text-white">View Details</button></td>
                   </tr>
                 )
               })
