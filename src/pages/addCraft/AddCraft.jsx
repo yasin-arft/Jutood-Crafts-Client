@@ -1,18 +1,36 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const AddCraft = () => {
   // auth info 
   const { currentUser } = useContext(AuthContext);
 
   // react hook form
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
 
   // add handler
   const handleAdd = data => {
-    console.log(data);
+
+    fetch('http://localhost:5000/crafts', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          toast.success('Item added successfully!');
+        }
+      });
   }
+
+  useEffect(() => {
+    if (!isSubmitSuccessful) { return }
+
+    reset();
+  }, [isSubmitSuccessful])
 
   return (
     <section className="max-w-xl mx-auto mb-6 md:mb-8 lg:mb-10">
