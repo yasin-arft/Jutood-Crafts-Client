@@ -46,6 +46,7 @@ const Register = () => {
 
   return (
     <div className="max-w-md mx-auto mb-6 md:mb-8 lg:mb-10">
+      <h2 className="text-3xl font-semibold text-center my-4">Please Register!</h2>
       <form onSubmit={handleSubmit(handleRegister)}>
         {/* name */}
         <label className="form-control w-full">
