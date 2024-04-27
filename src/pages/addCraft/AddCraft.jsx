@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const AddCraft = () => {
+  // auth info 
+  const { currentUser } = useContext(AuthContext);
+
   // react hook form
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -14,15 +19,6 @@ const AddCraft = () => {
       <h2 className="text-3xl font-semibold text-center my-4 font">Add an Art or Craft</h2>
 
       <form onSubmit={handleSubmit(handleAdd)}>
-        {/* photo url */}
-        <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text text-base font-medium">PhotoUrl</span>
-          </div>
-          <input
-            {...register('photo')}
-            type="text" placeholder="Enter photo url" className="input input-bordered w-full" />
-        </label>
 
         <div className="md:flex md:gap-5">
           {/* name */}
@@ -51,9 +47,19 @@ const AddCraft = () => {
               <option value={'Jute Kitchenware & utensils'}>Jute Kitchenware & utensils</option>
               <option value={'Jute and wooden jewellery'}>Jute and wooden jewellery</option>
             </select>
-            {errors.category && (<small className="text-error">{errors.category.message}</small>)}
+            {errors.subcategoryName && (<small className="text-error mt-2">{errors.subcategoryName.message}</small>)}
           </label>
         </div>
+
+        {/* photo url */}
+        <label className="form-control w-full">
+          <div className="label">
+            <span className="label-text text-base font-medium">PhotoUrl</span>
+          </div>
+          <input
+            {...register('photo')}
+            type="text" placeholder="Enter photo url" className="input input-bordered w-full" />
+        </label>
 
         {/* short description */}
         <label className="form-control">
@@ -96,29 +102,6 @@ const AddCraft = () => {
           </label>
         </div>
 
-        <div className="md:flex md:gap-5">
-
-          {/* user name */}
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text text-base font-medium">User name</span>
-            </div>
-            <input
-              {...register('userName')}
-              type="text" placeholder="Enter user name" className="input input-bordered w-full" />
-          </label>
-
-          {/* user email */}
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text text-base font-medium">User email</span>
-            </div>
-            <input
-              {...register('userEmail')}
-              type="email" placeholder="Enter user email" className="input input-bordered w-full" />
-          </label>
-        </div>
-
         <div className="md:flex md:gap-5 mt-2">
 
           {/* customization */}
@@ -154,6 +137,29 @@ const AddCraft = () => {
               </label>
             </div>
           </div>
+        </div>
+
+        <div className="md:flex md:gap-5">
+
+          {/* user name */}
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text text-base font-medium">User name</span>
+            </div>
+            <input
+              {...register('userName')}
+              type="text" value={currentUser?.displayName || ''} placeholder="Enter user name" className="input input-bordered w-full" readOnly />
+          </label>
+
+          {/* user email */}
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text text-base font-medium">User email</span>
+            </div>
+            <input
+              {...register('userEmail')}
+              type="email" value={currentUser?.email || ''} placeholder="Enter user email" className="input input-bordered w-full" readOnly />
+          </label>
         </div>
 
         {/* form submit button */}
