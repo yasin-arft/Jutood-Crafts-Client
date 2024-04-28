@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyArtCraftCard from "./MyArtCraftCard";
+import { useQuery } from "@tanstack/react-query";
 
 const MyArtCraft = () => {
   const { currentUser: { email } } = useContext(AuthContext);
-  const [myItems, setMyItems] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/my_crafts/${email}`)
-      .then(res => res.json())
-      .then(data => {
-        setMyItems(data);
-      })
-  }, [email]);
+  const { data, refetch } = useQuery({
+    queryKey: ['myCrafts'],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/my_crafts/${email}`)
+      const data = await res.json()
+      return data;
+    }
+  });
 
   return (
     <section>
@@ -20,7 +21,7 @@ const MyArtCraft = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {
-          myItems.map(item => <MyArtCraftCard key={item._id} data={item} />)
+          data?.map(item => <MyArtCraftCard key={item._id} item={item} refetch={refetch} />)
         }
       </div>
     </section>
