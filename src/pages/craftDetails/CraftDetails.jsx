@@ -9,7 +9,7 @@ const CraftDetails = () => {
       <div className="hero my-5">
         <div className="hero-content flex-col lg:flex-row w-full gap-8">
           <figure className="max-w-sm">
-            <img src={photo} className="w-full h-auto rounded-lg shadow-2xl" />
+            <img src={photo} alt={`${itemName} image`} className="w-full h-auto rounded-lg shadow-2xl" />
           </figure>
           <div className="flex-1">
             <h2 className="text-3xl font-bold">{itemName}</h2>
