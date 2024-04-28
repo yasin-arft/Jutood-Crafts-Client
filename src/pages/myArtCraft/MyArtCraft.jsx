@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyArtCraft = () => {
   const { currentUser: { email } } = useContext(AuthContext);
 
+  // tanstack query
   const { data, refetch } = useQuery({
     queryKey: ['myCrafts'],
     queryFn: async () => {

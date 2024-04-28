@@ -1,43 +1,62 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../providers/AuthProvider";
-import { toast } from "react-toastify";
+import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const AddCraft = () => {
-  // auth info 
-  const { currentUser } = useContext(AuthContext);
+const UpdateCraft = () => {
+  const itemData = useLoaderData();
 
   // react hook form
-  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } = useForm({
+    defaultValues: itemData
+  });
 
   // add handler
-  const handleAdd = data => {
+  const handleUpdate = data => {
+    // warning
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to update this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, update it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-    fetch('http://localhost:5000/crafts', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.insertedId) {
-          toast.success('Item added successfully!');
-        }
-      });
-  }
+        fetch(`http://localhost:5000/crafts/${itemData._id}`, {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.modifiedCount > 0) {
+              Swal.fire({
+                title: "Updated!",
+                text: "Your craft item has been updated.",
+                icon: "success"
+              });
+            }
+          });
+      }
+    }
+    );
+  };
 
   // reset form
   useEffect(() => {
     if (!isSubmitSuccessful) { return }
 
     reset();
-  }, [isSubmitSuccessful])
+  }, [isSubmitSuccessful]);
 
   return (
     <section className="max-w-xl mx-auto mb-6 md:mb-8 lg:mb-10">
-      <h2 className="text-3xl font-semibold text-center my-4 font">Add an Art or Craft</h2>
+      <h2 className="text-3xl font-semibold text-center my-4 font">Update {itemData.itemName}</h2>
 
-      <form onSubmit={handleSubmit(handleAdd)}>
+      <form onSubmit={handleSubmit(handleUpdate)}>
 
         <div className="md:flex md:gap-5">
           {/* name */}
@@ -158,29 +177,6 @@ const AddCraft = () => {
           </div>
         </div>
 
-        <div className="md:flex md:gap-5">
-
-          {/* user name */}
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text text-base font-medium">User name</span>
-            </div>
-            <input
-              {...register('userName')}
-              type="text" value={currentUser?.displayName || ''} placeholder="Enter user name" className="input input-bordered w-full" readOnly />
-          </label>
-
-          {/* user email */}
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text text-base font-medium">User email</span>
-            </div>
-            <input
-              {...register('userEmail')}
-              type="email" value={currentUser?.email || ''} placeholder="Enter user email" className="input input-bordered w-full" readOnly />
-          </label>
-        </div>
-
         {/* form submit button */}
         <input
           type="submit"
@@ -192,4 +188,4 @@ const AddCraft = () => {
   );
 };
 
-export default AddCraft;
+export default UpdateCraft;

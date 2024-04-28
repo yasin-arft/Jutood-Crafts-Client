@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const MyArtCraftCard = ({ item, refetch }) => {
   const { _id, customization, itemName, photo, price, rating, stockStatus } = item;
+  const navigate = useNavigate();
 
   const handleDelete = id => {
     // warning
@@ -22,7 +24,6 @@ const MyArtCraftCard = ({ item, refetch }) => {
         })
           .then(res => res.json())
           .then(data => {
-            console.log(data)
             if (data.deletedCount) {
               // delete confirmation 
               Swal.fire({
@@ -36,7 +37,6 @@ const MyArtCraftCard = ({ item, refetch }) => {
           });
       }
     });
-
   };
 
   return (
@@ -55,7 +55,7 @@ const MyArtCraftCard = ({ item, refetch }) => {
           <span><span className='font-medium'>Stock status:</span> {stockStatus}</span>
         </div>
         <div className="card-actions justify-between">
-          <button className="btn bg-primary hover:bg-secondary text-white">Update</button>
+          <button onClick={() => navigate(`/update_craft/${_id}`)} className="btn bg-primary hover:bg-secondary text-white">Update</button>
           <button onClick={() => handleDelete(_id)} className="btn border border-dark hover:bg-red-600 hover:text-white">Delete</button>
         </div>
       </div>
