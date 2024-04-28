@@ -16,9 +16,9 @@ const MyArtCraft = () => {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold text-center my-4">Please Login!</h2>
+      <h2 className="text-3xl font-semibold text-center my-4">My Art and Craft</h2>
 
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {
           myItems.map(item => <MyArtCraftCard key={item._id} data={item} />)
         }
