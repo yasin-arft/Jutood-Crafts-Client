@@ -1,6 +1,7 @@
 import AboutUs from "./AboutUs";
 import Banner from "./Banner";
-import CraftItems from "./CraftItems";
+import GetInTouch from "./GetInTouch";
+import CraftItems from "./craftItems/CraftItems";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <AboutUs />
       <CraftItems />
+      <GetInTouch />
     </div>
   );
 };

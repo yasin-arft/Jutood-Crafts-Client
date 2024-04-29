@@ -5,7 +5,6 @@ const CraftItemCard = ({ data }) => {
   const { _id, photo, itemName, price, rating, customization, stockStatus } = data;
   const navigate = useNavigate();
   
-  console.log(data);
   return (
     <div className="card card-compact shadow-xl">
       <figure className='h-52 w-full'>
