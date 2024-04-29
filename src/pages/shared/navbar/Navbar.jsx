@@ -3,6 +3,7 @@ import OurNavLink from "./OurNavLink";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "react-toastify";
+import { Tooltip } from 'react-tooltip';
 
 const Navbar = () => {
   const { currentUser, logout, setLoading } = useContext(AuthContext);
@@ -40,14 +41,14 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="container mx-auto px-3">
+    <nav className="container mx-auto sm:px-3">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden z-50">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
-            <ul tabIndex={0} className="nav-ul flex-col menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="nav-ul flex-col menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50">
               {navLinks}
             </ul>
           </div>
@@ -62,10 +63,11 @@ const Navbar = () => {
           {
             currentUser ?
               <div className="flex gap-2 items-center">
-                <span>
+                <span data-tooltip-id="userName-tooltip" data-tooltip-content={currentUser?.displayName} className="w-20 overflow-auto text-nowrap cursor-pointer hidden sm:inline">
                   {
                     currentUser.photoURL
                   }
+                  <Tooltip id="userName-tooltip" className="z-50"/>
                 </span>
                 <button onClick={handleLogout} className="border btn bg-primary hover:bg-secondary text-white duration-300">Logout</button>
               </div> :
