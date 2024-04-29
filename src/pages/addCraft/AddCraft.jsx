@@ -13,7 +13,7 @@ const AddCraft = () => {
   // add handler
   const handleAdd = data => {
 
-    fetch('http://localhost:5000/crafts', {
+    fetch('https://jutood-crafts-server.vercel.app/crafts', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data)

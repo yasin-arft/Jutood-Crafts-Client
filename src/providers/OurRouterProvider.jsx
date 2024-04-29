@@ -36,12 +36,12 @@ const router = createBrowserRouter([
       {
         path: '/all_art_craft',
         element: <AllArtCraft />,
-        loader: () => fetch('http://localhost:5000/crafts')
+        loader: () => fetch('https://jutood-crafts-server.vercel.app/crafts')
       },
       {
         path: '/item_details/:id',
         element: <PrivateRoute><CraftDetails /></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/crafts/${params.id}`)
+        loader: ({ params }) => fetch(`https://jutood-crafts-server.vercel.app/crafts/${params.id}`)
       },
       {
         path: '/my_art_craft',
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: '/update_craft/:id',
         element: <PrivateRoute><UpdateCraft /></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/crafts/${params.id}`)
+        loader: ({ params }) => fetch(`https://jutood-crafts-server.vercel.app/crafts/${params.id}`)
       }
     ]
   }

@@ -19,7 +19,7 @@ const MyArtCraftCard = ({ item, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // if confirmed 
-        fetch(`http://localhost:5000/crafts/${id}`, {
+        fetch(`https://jutood-crafts-server.vercel.app/crafts/${id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

@@ -10,7 +10,7 @@ const MyArtCraft = () => {
   const { data, refetch } = useQuery({
     queryKey: ['myCrafts'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/my_crafts/${email}`)
+      const res = await fetch(`https://jutood-crafts-server.vercel.app/my_crafts/${email}`)
       const data = await res.json()
       return data;
     }

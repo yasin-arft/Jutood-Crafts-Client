@@ -25,7 +25,7 @@ const UpdateCraft = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:5000/crafts/${itemData._id}`, {
+        fetch(`https://jutood-crafts-server.vercel.app/crafts/${itemData._id}`, {
           method: 'PUT',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(data)
