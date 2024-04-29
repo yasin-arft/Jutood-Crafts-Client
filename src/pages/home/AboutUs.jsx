@@ -2,7 +2,7 @@
 const AboutUs = () => {
   return (
     <section>
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-4xl mx-auto text-justify">
         <h2 className="text-3xl font-semibold text-center my-4 font-pacifico">About us</h2>
         <p className="mb-6">
           Welcome to Jutood Crafts, where we blend the timeless beauty of jute and wood into exquisite crafts for your home.

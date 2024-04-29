@@ -21,6 +21,10 @@ const Banner = () => {
     <section className='mb-6 md:mb-8 lg:mb-10'>
       <Swiper
         loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           dynamicBullets: true,
         }}
@@ -30,9 +34,6 @@ const Banner = () => {
         {
           slidersData.map(item => <SwiperSlide key={item.id}><OurSlide sliderData={item} /></SwiperSlide>)
         }
-        {/* <SwiperSlide><OurSlide /></SwiperSlide>
-        <SwiperSlide><OurSlide /></SwiperSlide>
-        <SwiperSlide><OurSlide /></SwiperSlide> */}
       </Swiper>
     </section>
   );

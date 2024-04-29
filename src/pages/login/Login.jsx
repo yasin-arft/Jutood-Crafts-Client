@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   // auth info
-  const { loginUser, setLoading } = useContext(AuthContext);
+  const { loginUser, setLoading, googleLogin, githubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // react hook form
@@ -25,11 +25,38 @@ const Login = () => {
         navigate('/');
         toast.success('Logged in successfully!');
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
         toast.error('Incorrect email or password');
       });
+  }
+
+  // google login handler
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        setLoading(false);
+        navigate('/');
+        toast.success('Logged in successfully!');
+      })
+      .catch(() => {
+        setLoading(false);
+        toast.error('An unexpected error happened!');
+      })
+  }
+
+  // github login handler
+  const handleGithubLogin = () => {
+    githubLogin()
+      .then(() => {
+        setLoading(false);
+        navigate('/');
+        toast.success('Logged in successfully!');
+      })
+      .catch(() => {
+        setLoading(false);
+        toast.error('An unexpected error happened!');
+      })
   }
 
   return (
@@ -74,11 +101,11 @@ const Login = () => {
       <div className="divider">Or</div>
 
       {/* social login options */}
-      <button className="btn w-full border border-secondary hover:border-royal-blue-dark hover:bg-primary hover:text-white">
+      <button onClick={handleGoogleLogin} className="btn w-full border border-secondary hover:border-royal-blue-dark hover:bg-primary hover:text-white">
         <FaGoogle className="text-xl" />
         Login with Google
       </button>
-      <button className="btn w-full border border-secondary hover:border-royal-blue-dark hover:bg-primary hover:text-white mt-3">
+      <button onClick={handleGithubLogin} className="btn w-full border border-secondary hover:border-royal-blue-dark hover:bg-primary hover:text-white mt-3">
         <FaGithub className="text-xl" />
         Login with Github
       </button>
