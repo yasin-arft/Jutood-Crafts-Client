@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: '/subcategory_item/:subcategoryName',
         element: <SubcategoryItem />,
-        loader: ({ params }) => fetch(`http://localhost:5000/subcategory_crafts/${params.subcategoryName}`)
+        loader: ({ params }) => fetch(`https://jutood-crafts-server.vercel.app/${params.subcategoryName}`)
       }
     ]
   }

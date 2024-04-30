@@ -5,7 +5,7 @@ const CraftsCategories = () => {
   const [craftCat, setCraftCat] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/crafts_sub_cate')
+    fetch('https://jutood-crafts-server.vercel.app/crafts_sub_cate')
       .then(res => res.json())
       .then(data => {
         setCraftCat(data);
