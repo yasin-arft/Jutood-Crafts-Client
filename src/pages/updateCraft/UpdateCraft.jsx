@@ -180,7 +180,7 @@ const UpdateCraft = () => {
         {/* form submit button */}
         <input
           type="submit"
-          value="Add Item"
+          value="Update Item"
           className="btn bg-primary text-white w-full mt-3 hover:bg-secondary" />
 
       </form>

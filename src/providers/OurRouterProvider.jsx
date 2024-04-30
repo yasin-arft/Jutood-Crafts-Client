@@ -10,6 +10,7 @@ import AllArtCraft from "../pages/allArtCraft/AllArtCraft";
 import CraftDetails from "../pages/craftDetails/CraftDetails";
 import MyArtCraft from "../pages/myArtCraft/MyArtCraft";
 import UpdateCraft from "../pages/updateCraft/UpdateCraft";
+import SubcategoryItem from "../pages/subcategoryItem/SubcategoryItem";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
         path: '/update_craft/:id',
         element: <PrivateRoute><UpdateCraft /></PrivateRoute>,
         loader: ({ params }) => fetch(`https://jutood-crafts-server.vercel.app/crafts/${params.id}`)
+      },
+      {
+        path: '/subcategory_item/:subcategoryName',
+        element: <SubcategoryItem />,
+        loader: ({ params }) => fetch(`http://localhost:5000/subcategory_crafts/${params.subcategoryName}`)
       }
     ]
   }
